@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FF Reward Hub</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d34;--line:#283552;--text:#f4f7ff;--muted:#aab6d0;--gold:#ffc857;--green:#48d597}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#1d2b50,#0b1020 55%);font-family:system-ui,Arial;color:var(--text)}
+main{max-width:760px;margin:auto;padding:22px 16px 50px}.brand{font-weight:900;letter-spacing:1.5px;font-size:25px}.brand span{color:var(--gold)}
+.hero,.panel{background:rgba(21,29,52,.94);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px;box-shadow:0 12px 35px #0003}
+.hero{text-align:center}.tag{color:var(--green);font-size:12px;font-weight:800;letter-spacing:1.2px}.balance{font-size:42px;font-weight:900;color:var(--gold);margin:7px 0}.muted{color:var(--muted);font-size:13px;line-height:1.55}
+nav{display:flex;gap:8px;margin-top:16px}button{border:0;border-radius:12px;padding:12px 15px;font-weight:800;cursor:pointer;background:var(--gold);color:#171717}nav button{flex:1;background:#263451;color:var(--text)}nav button.active{background:var(--gold);color:#171717}
+h2{font-size:19px;margin:0 0 12px}.row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.reward{border:1px solid var(--line);border-radius:14px;padding:14px;background:#10182c}.reward strong{display:block;color:var(--gold);font-size:22px}
+input{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:#0d1426;color:white;margin:7px 0 12px}
+.full{width:100%;margin-top:10px}.notice{background:#332b18;border:1px solid #6b5524;color:#ffe2a1;padding:12px;border-radius:12px;font-size:13px;line-height:1.5}
+.hidden{display:none}.status{color:var(--green);font-size:12px}.footer{text-align:center;margin:22px 0;color:var(--muted);font-size:12px}
+@media(max-width:420px){.balance{font-size:34px}.grid{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<div class="brand">FF <span>REWARD HUB</span></div>
+<section class="hero">
+<div class="tag">REWARDS • COINS • REDEMPTION</div>
+<div class="balance" id="balance">0 🪙</div>
+<div class="muted">Your account coin balance</div>
+<nav><button class="active" id="earnTab" onclick="show('earn')">Earn</button><button id="redeemTab" onclick="show('redeem')">Redeem</button><button id="historyTab" onclick="show('history')">History</button></nav>
+</section>
+<section class="panel" id="earn">
+<h2>Earn coins</h2>
+<div class="notice">Ad rewards are not active yet. A real approved ad network integration and server-side reward verification are required before coins can be credited. This page will not pretend that an ad was watched.</div>
+<div class="row"><span>Reward rate</span><strong>10 coins = ₹10</strong></div>
+<div class="row"><span>Ad provider</span><span class="status">Not connected</span></div>
+<div class="row"><span>Account verification</span><span class="status">Not configured</span></div>
+</section>
+<section class="panel hidden" id="redeem">
+<h2>Redeem rewards</h2>
+<p class="muted">Choose a reward tier. Requests are disabled until an authorized reward supplier and secure backend are connected.</p>
+<div class="grid" id="rewards"></div>
+<label class="muted" for="player">Free Fire Player UID</label>
+<input id="player" inputmode="numeric" placeholder="Enter your Player UID">
+<button class="full" disabled style="opacity:.55;cursor:not-allowed">Redeem — setup required</button>
+</section>
+<section class="panel hidden" id="history"><h2>Activity</h2><p class="muted">No verified ad earnings or fulfilled reward requests yet.</p></section>
+<section class="panel">
+<h2>What is needed to go live?</h2>
+<div class="row"><span>1. Hosting</span><span class="status">Free static hosting possible</span></div>
+<div class="row"><span>2. Secure backend + database</span><span class="status">Not set up</span></div>
+<div class="row"><span>3. Approved ad network</span><span class="status">Not connected</span></div>
+<div class="row"><span>4. Legitimate reward supplier</span><span class="status">Not connected</span></div>
+</section>
+<div class="footer">FF Reward Hub • Starter website source<br>Not affiliated with Garena or Free Fire.</div>
+</main>
+<script>
+const tiers=[10,50,100,200,300,400,500];
+document.getElementById('rewards').innerHTML=tiers.map(v=>`<div class="reward"><strong>₹${v}</strong>${v} coins<br><small class="muted">Reward value tier</small></div>`).join('');
+function show(id){['earn','redeem','history'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));['earnTab','redeemTab','historyTab'].forEach(x=>document.getElementById(x).classList.toggle('active',x===id+'Tab'))}
+</script></body></html>
